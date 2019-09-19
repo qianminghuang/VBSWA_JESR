@@ -1,4 +1,4 @@
-# Run2VBSWGamma_ntuple
+# Run2VBSWGamma_ntuple for JES/R uncertainty investigation
 
 cmsrel CMSSW_8_0_32
 
@@ -80,6 +80,6 @@ git-cms-addpkg SimDataFormats/JetMatching/
 
 
 
-git clone https://github.com/qianminghuang/VBSWGamma.git VAJets
+git clone https://github.com/qianminghuang/VBSWA_JESR.git VAJets
 
 scram b (-j 8) 
