@@ -249,15 +249,15 @@ void JetUserData::produce( edm::Event& iEvent, const edm::EventSetup& iSetup) {
 
 
 		// JEC uncertainty
-
+		reco::Candidate::LorentzVector smearedP4_JEC_central =jetCorrFactor*rawJetP4;
 		reco::Candidate::LorentzVector smearedP4_JEC_up =jetCorrFactor*rawJetP4;
 		reco::Candidate::LorentzVector smearedP4_JEC_down =jetCorrFactor*rawJetP4;
 
 		jetParam.setJetPt(jetCorrFactor*rawJetP4.pt()).setJetEta(jet.eta()).setRho(*rho);
 		float PtResolution = resolution.getResolution(jetParam);
 		float JERSF_temp        = res_sf.getScaleFactor(jetParam);
-		smearedP4_JEC_up *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
-		smearedP4_JEC_down *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
+		//smearedP4_JEC_up *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
+		//smearedP4_JEC_down *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
 
 
 		jecUnc.setJetPt (smearedP4_JEC_up.pt());// here you must use the CORRECTED jet pt
@@ -386,6 +386,9 @@ void JetUserData::produce( edm::Event& iEvent, const edm::EventSetup& iSetup) {
 		jet.addUserFloat("SmearedE_JEC_up",     smearedP4_JEC_up.energy());
 		jet.addUserFloat("SmearedPt_JEC_down",    smearedP4_JEC_down.pt());
 		jet.addUserFloat("SmearedE_JEC_down",     smearedP4_JEC_down.energy());
+
+		jet.addUserFloat("SmearedPt_JEC_central",    smearedP4_JEC_central.pt());
+		jet.addUserFloat("SmearedE_JEC_central",     smearedP4_JEC_central.energy());
 
 		jet.addUserFloat("corrEx_MET_JEC",     corrEx_MET_JEC);
 		jet.addUserFloat("corrEy_MET_JEC",     corrEy_MET_JEC);
