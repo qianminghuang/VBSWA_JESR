@@ -1,5 +1,7 @@
 # Run2VBSWGamma_ntuple for JES/R uncertainty investigation
 
+compile under lxplus6
+
 cmsrel CMSSW_8_0_32
 
 cd CMSSW_8_0_32/src
