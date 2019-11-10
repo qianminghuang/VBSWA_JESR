@@ -155,6 +155,7 @@ double JetUserData::get_JER_corr(float JERSF, bool isMC, pat::Jet jet, double co
 		}
 		if (!isGenMatched && JERSF>1) {
 			double sigma = std::sqrt(JERSF * JERSF - 1) * PtResolution;
+			rnd_.SetSeed(3);
 			JER_corrFactor = 1 + rnd_.Gaus(0, sigma);
 		}
 	}
@@ -256,8 +257,8 @@ void JetUserData::produce( edm::Event& iEvent, const edm::EventSetup& iSetup) {
 		jetParam.setJetPt(jetCorrFactor*rawJetP4.pt()).setJetEta(jet.eta()).setRho(*rho);
 		float PtResolution = resolution.getResolution(jetParam);
 		float JERSF_temp        = res_sf.getScaleFactor(jetParam);
-		//smearedP4_JEC_up *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
-		//smearedP4_JEC_down *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
+		smearedP4_JEC_up *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
+		smearedP4_JEC_down *= get_JER_corr(JERSF_temp, isMC, jet, coneSize_, PtResolution, jetCorrFactor);
 
 
 		jecUnc.setJetPt (smearedP4_JEC_up.pt());// here you must use the CORRECTED jet pt
