@@ -313,13 +313,19 @@ void JetUserData::produce( edm::Event& iEvent, const edm::EventSetup& iSetup) {
 			if ( corrJetP4_MET.pt() > type1JetPtThreshold_ ) {
 				corrEx_MET_JEC    -= (corrJetP4_MET.px() - rawJetP4offsetCorr_MET.px());
 				corrEy_MET_JEC    -= (corrJetP4_MET.py() - rawJetP4offsetCorr_MET.py());
-				corrSumEt_MET_JEC += (corrJetP4_MET.Et() - rawJetP4offsetCorr_MET.Et());
+				//corrSumEt_MET_JEC += (corrJetP4_MET.Et() - rawJetP4offsetCorr_MET.Et());
 				corrEx_MET_JEC_up    -= (corrJetP4_up_MET.px() - rawJetP4offsetCorr_up_MET.px());
 				corrEy_MET_JEC_up    -= (corrJetP4_up_MET.py() - rawJetP4offsetCorr_up_MET.py());
-				corrSumEt_MET_JEC_up += (corrJetP4_up_MET.Et() - rawJetP4offsetCorr_up_MET.Et());
+				//corrSumEt_MET_JEC_up += (corrJetP4_up_MET.Et() - rawJetP4offsetCorr_up_MET.Et());
 				corrEx_MET_JEC_down    -= (corrJetP4_down_MET.px() - rawJetP4offsetCorr_down_MET.px());
 				corrEy_MET_JEC_down    -= (corrJetP4_down_MET.py() - rawJetP4offsetCorr_down_MET.py());
-				corrSumEt_MET_JEC_down += (corrJetP4_down_MET.Et() - rawJetP4offsetCorr_down_MET.Et());
+				//corrSumEt_MET_JEC_down += (corrJetP4_down_MET.Et() - rawJetP4offsetCorr_down_MET.Et());
+//qianming 20191110
+				corrSumEt_MET_JEC = std::hypot(corrEx_MET_JEC,corrEy_MET_JEC);
+				corrSumEt_MET_JEC_up = std::hypot(corrEx_MET_JEC_up,corrEy_MET_JEC_up);
+				corrSumEt_MET_JEC_down = std::hypot(corrEx_MET_JEC_down,corrEy_MET_JEC_down);
+
+//qianming 20191110
 			}
 		}
 		//-----------------------for MET
@@ -355,15 +361,25 @@ void JetUserData::produce( edm::Event& iEvent, const edm::EventSetup& iSetup) {
 		smearedP4_JER_down *= get_JER_corr(JERSFDown_JER, isMC, jet, coneSize_, PtResolution_JER, jetCorrFactor);
 
 
+
+//qianming 20191110
 		corrEx_MET_JER -= (smearedP4.px() - smearedP4_raw.px());
 		corrEx_MET_JER_up -= (smearedP4_JER_up.px() - smearedP4_up_raw.px());
 		corrEx_MET_JER_down -= (smearedP4_JER_down.px() - smearedP4_down_raw.px());
 		corrEy_MET_JER -= (smearedP4.py() - smearedP4_raw.py());
 		corrEy_MET_JER_up -= (smearedP4_JER_up.py() - smearedP4_up_raw.py());
 		corrEy_MET_JER_down -= (smearedP4_JER_down.py() - smearedP4_down_raw.py());
-		corrSumEt_MET_JER += (smearedP4.Et() - smearedP4_raw.Et());
-		corrSumEt_MET_JER_up += (smearedP4_JER_up.Et() - smearedP4_up_raw.Et());
-		corrSumEt_MET_JER_down += (smearedP4_JER_down.Et() - smearedP4_down_raw.Et());
+
+		//corrSumEt_MET_JER += (smearedP4.Et() - smearedP4_raw.Et());
+		//corrSumEt_MET_JER_up += (smearedP4_JER_up.Et() - smearedP4_up_raw.Et());
+		//corrSumEt_MET_JER_down += (smearedP4_JER_down.Et() - smearedP4_down_raw.Et());
+
+corrSumEt_MET_JER = std::hypot(corrEx_MET_JER,corrEy_MET_JER);
+corrSumEt_MET_JER_up = std::hypot(corrEx_MET_JER_up,corrEy_MET_JER_up);
+corrSumEt_MET_JER_down = std::hypot(corrEx_MET_JER_down,corrEy_MET_JER_down);
+
+
+//qianming 20191110
 
 
 		jet.addUserFloat("jecUncertainty_up",   jecUncertainty_up);
