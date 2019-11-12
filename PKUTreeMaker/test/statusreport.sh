@@ -20,9 +20,9 @@ crab status -d crab_ZZ-1
 crab status -d crab_ZZ-2
 crab status -d crab_WJets-1
 crab status -d crab_WJets-2
-#crab status -d crab_TTA-1
-#crab status -d crab_TTA-2
-#crab status -d crab_ZA-1
+crab status -d crab_TTA-1
+crab status -d crab_TTA-2
+crab status -d crab_ZA-1
 #crab status -d crab_ZA-private
 #crab status -d crab_W3Jets-1
 #crab status -d crab_W3Jets-2

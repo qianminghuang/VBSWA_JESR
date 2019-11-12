@@ -18,11 +18,13 @@ config.Data.inputDBS = 'global'
 config.Data.splitting = 'FileBased'
 config.Data.unitsPerJob = 1
 config.Data.totalUnits = -1
+config.Data.outLFNDirBase = '/store/group/phys_jetmet/qihuang/'
+#config.Data.outLFNDirBase = '/store/user/qihuang/'
 config.Data.publication = False
 config.Data.outputDatasetTag = 'ZA-1'
 
 config.section_("Site")
-config.Site.storageSite = 'T3_US_FNALLPC'  #2_CH_CERN'
+config.Site.storageSite = 'T2_CH_CERN'
 
 
 
